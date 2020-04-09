@@ -1,0 +1,390 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vsm ="clr-namespace:System.Windows;assembly=PresentationFramework"
+>
+
+    <!--COLORS-->
+
+    <!--Teal-->
+    <Color x:Key="Primary">#00796b</Color>
+    <Color x:Key="PrimaryDark">#004c40</Color>
+    <Color x:Key="PrimaryLight">#48a999</Color>
+
+    <Color x:Key="DisabledColor">Gray</Color>
+
+    <!--BRUSHES-->
+
+    <SolidColorBrush x:Key="PrimaryBrush"
+                     Color="{StaticResource Primary}" />
+    <SolidColorBrush x:Key="PrimaryDarkBrush"
+                     Color="{StaticResource PrimaryDark}" />
+    <SolidColorBrush x:Key="PrimaryLightBrush"
+                     Color="{StaticResource PrimaryLight}" />
+    <SolidColorBrush x:Key="DisabledColorBrush"
+                     Color="Gray" />
+
+
+    <!--TEXTBLOCK-->
+
+    <Style TargetType="TextBlock">
+        <Setter Property="FontSize"
+                Value="18" />
+        <Setter Property="Foreground"
+                Value="{StaticResource PrimaryDarkBrush}" />
+        <Setter Property="Focusable"
+                Value="False" />
+    </Style>
+
+    <!--TEXTBOX-->
+
+    <ContextMenu x:Key="TextBoxContextMenu" Background="White">
+        <MenuItem Command="ApplicationCommands.Cut" />
+        <MenuItem Command="ApplicationCommands.Copy" />
+        <MenuItem Command="ApplicationCommands.Paste" />
+    </ContextMenu>
+
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="KeyboardNavigation.TabNavigation"
+                Value="None" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="MinWidth"
+                Value="120" />
+        <Setter Property="MinHeight"
+                Value="40" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="DarkGray" />
+        <Setter Property="AllowDrop"
+                Value="true" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border Name="Border"
+                            CornerRadius="0"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="2,2,2,2">
+                        <vsm:VisualStateManager.VisualStateGroups>
+                            <vsm:VisualStateGroup x:Name="CommonStates">
+                                <vsm:VisualState x:Name="Normal" />
+                                <vsm:VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                      Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="{StaticResource DisabledColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                      Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FFAAAAAA" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                                <vsm:VisualState x:Name="ReadOnly">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                      Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="{StaticResource DisabledColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                                <vsm:VisualState x:Name="MouseOver" />
+                            </vsm:VisualStateGroup>
+                        </vsm:VisualStateManager.VisualStateGroups>
+                        <ScrollViewer Margin="0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      VerticalContentAlignment="Center"
+                                      x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="White"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type PasswordBox}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="KeyboardNavigation.TabNavigation"
+                Value="None" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="MinWidth"
+                Value="120" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="DarkGray" />
+        <Setter Property="MinHeight"
+                Value="40" />
+        <Setter Property="AllowDrop"
+                Value="true" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1"
+                                    Name="Border"
+                                    CornerRadius="0"
+                                    Background="White"
+                                    Padding="6,2,6,2">
+                                <vsm:VisualStateManager.VisualStateGroups>
+                                    <vsm:VisualStateGroup x:Name="CommonStates">
+                                        <vsm:VisualState x:Name="Normal" />
+                                        <vsm:VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0"
+                                                                         Value="LightGray" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </vsm:VisualState>
+                                        <vsm:VisualState x:Name="ReadOnly">
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                    <EasingColorKeyFrame KeyTime="0"
+                                                                         Value="LightGray" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </vsm:VisualState>
+                                        <vsm:VisualState x:Name="MouseOver" />
+                                    </vsm:VisualStateGroup>
+                                </vsm:VisualStateManager.VisualStateGroups>
+                                <ScrollViewer Margin="0"
+                                              VerticalContentAlignment="Center"
+                                              x:Name="PART_ContentHost" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu Visibility="Collapsed" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--BUTTONS-->
+
+    <Style TargetType="Label"
+           x:Key="lbButtonContent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border Background="{TemplateBinding Control.Background}"
+                            BorderThickness="{TemplateBinding Control.BorderThickness}"
+                            BorderBrush="{TemplateBinding Control.BorderBrush}"
+                            Padding="{TemplateBinding Control.Padding}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}">
+                            <ContentPresenter.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground"
+                                            Value="{Binding RelativeSource={RelativeSource AncestorType=Label}, Path=Foreground}" />
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BaseButton"
+           TargetType="Button"
+           BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="MinWidth"
+                Value="200" />
+        <Setter Property="MinHeight"
+                Value="40" />
+        <Setter Property="FontSize"
+                Value="22" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentControl  x:Name="ContentControl"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center" IsTabStop="False" Focusable="False"
+                                         Margin="10,0">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+                                <Label x:Name="TextBlockKey"
+                                       Margin="10,0"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Style="{StaticResource lbButtonContent}"
+                                       VerticalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       Content="{TemplateBinding Tag}"
+                                       Foreground="{TemplateBinding Foreground}" />
+
+                                <Label x:Name="TextBlock"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="Center"
+                                       Content="{TemplateBinding Content}"
+                                       Style="{StaticResource lbButtonContent}" />
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="{StaticResource DisabledColorBrush}" />
+                            <Setter TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="{StaticResource DisabledColorBrush}" />
+                            <Setter TargetName="TextBlock"
+                                    Property="Foreground"
+                                    Value="White" />
+                            <Setter TargetName="TextBlockKey"
+                                    Property="Foreground"
+                                    Value="White" />
+                        </Trigger>
+                        <Trigger Property="Tag"
+                                 Value="{x:Null}">
+                            <Setter Property="Visibility"
+                                    TargetName="TextBlockKey"
+                                    Value="Collapsed"></Setter>
+                            <Setter Property="HorizontalAlignment"
+                                    TargetName="ContentControl"
+                                    Value="Center"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CommonButton"
+           TargetType="Button"
+           BasedOn="{StaticResource BaseButton}">
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="Background"
+                Value="{StaticResource PrimaryDarkBrush}" />
+    </Style>
+
+    <Style x:Key="BigCommonButton"
+           TargetType="Button"
+           BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Width"
+                Value="270" />
+        <Setter Property="MinHeight"
+                Value="70" />
+        <Setter Property="MaxHeight"
+                Value="135" />
+        <Setter Property="FontSize"
+                Value="22" />
+        <Setter Property="Padding"
+                Value="5" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="Background"
+                Value="{StaticResource PrimaryDarkBrush}" />
+        <Setter Property="FontWeight"
+                Value="Bold" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="ButtonBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{StaticResource PrimaryDarkBrush}"
+                                BorderThickness="1"
+                                CornerRadius="0">
+                            <ContentControl  HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Center"
+                                             Margin="0,0,5,0">
+                                <Border>
+                                    <DockPanel>
+                                        <TextBlock Name="KeyBlock"
+                                                   Margin="14,0,14,0"
+                                                   Background="{StaticResource PrimaryDarkBrush}"
+                                                   Padding="{TemplateBinding Padding}"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="18"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"
+                                                   Text="{TemplateBinding Tag}"
+                                                   TextWrapping="Wrap"/>
+                                        <TextBlock Name="NameActionBlock"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="{TemplateBinding FontSize}"
+                                                   FontWeight="{TemplateBinding FontWeight}"
+                                                   Foreground="{TemplateBinding Foreground}"
+                                                   Text="{TemplateBinding Content}"
+                                                   TextWrapping="Wrap"
+                                                   LineHeight="{TemplateBinding FontSize}"
+                                                   LineStackingStrategy="BlockLineHeight"/>
+                                    </DockPanel>
+                                </Border>
+                            </ContentControl>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="Gray" />
+                        </Trigger>
+                        <Trigger Property="Tag"
+                                 Value="{x:Null}">
+                            <Setter Property="Visibility"
+                                    TargetName="KeyBlock"
+                                    Value="Collapsed"></Setter>
+                            <Setter Property="HorizontalAlignment"
+                                    TargetName="NameActionBlock"
+                                    Value="Center"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+   </ResourceDictionary>

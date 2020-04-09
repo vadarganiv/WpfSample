@@ -1,0 +1,60 @@
+﻿<Page x:Class="ReportSaver.Views.ReportsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReportSaver.Views"
+      xmlns:viewModels="clr-namespace:ReportSaver.ViewModels"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance viewModels:ReportsViewModel}"
+      d:DesignHeight="1080" d:DesignWidth="1240"
+      Title="ReportsView">
+    <Page.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource BigCommonButton}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="20,60"/>
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid  Background="{StaticResource PrimaryDarkBrush}">
+                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Grid}},Path=ActualHeight}">Отчеты</TextBlock>
+            </Grid>
+                <Grid Grid.Row="1" Background="{StaticResource PrimaryBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <UniformGrid Columns="1" >
+                    <Button Command="{Binding SetCurrentReportCommand}" CommandParameter="{Binding ElementName=ListView,Path=SelectedItem}" >Редактировать</Button>
+                    <Button  Command="{Binding MainMenuCommand}">Главное меню</Button>
+                </UniformGrid>
+                <ListView x:Name="ListView" Grid.Column="1"  SelectedIndex="0" Margin="10" ItemsSource="{Binding Reports}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  DisplayMemberBinding="{Binding Id}" Header="Id"/>
+                            <GridViewColumn  DisplayMemberBinding="{Binding Produced}" Header="Произведено" />
+                            <GridViewColumn  DisplayMemberBinding="{Binding Rejected}" Header="Брак" />
+                            <GridViewColumn  DisplayMemberBinding="{Binding Purchased}" Header="Куплено" />
+                            <GridViewColumn  DisplayMemberBinding="{Binding Sales}" Header="Продано" />
+                            <GridViewColumn  DisplayMemberBinding="{Binding Returned}" Header="Возврат" />
+                            <GridViewColumn  DisplayMemberBinding="{Binding Lost}" Header="Утеряно" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid  Grid.Row="2"  Background="{StaticResource PrimaryDarkBrush}"/>
+        </Grid>
+
+
+
+
+    </Grid>
+</Page>

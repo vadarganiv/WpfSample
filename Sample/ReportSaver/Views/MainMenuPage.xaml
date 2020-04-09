@@ -1,0 +1,35 @@
+﻿<Page x:Class="ReportSaver.Views.MainMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReportSaver.Views"
+      xmlns:viewModels="clr-namespace:ReportSaver.ViewModels"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance viewModels:MainMenuViewModel}"
+      d:DesignHeight="1080" d:DesignWidth="1240"
+      Title="MainMenuPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource PrimaryDarkBrush}">
+            <TextBlock Foreground="White" FontSize="40" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">Главное меню</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1"  Background="{StaticResource PrimaryBrush}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Command="{Binding GetReportCommand}" Style="{StaticResource CommonButton}" Margin="10" Height="44" Width="270" Content="Загрузить отчет" 
+                        Focusable="False" IsTabStop="False" IsDefault="True" />
+                <Button Command="{Binding ReportListPageCommand}" Style="{StaticResource CommonButton}" Margin="10" Height="44" Width="270" Content="Отчеты" 
+                         Focusable="False" IsTabStop="False" IsDefault="True" />
+                <Button Command="{Binding HistoryLogsPageCommand}" Style="{StaticResource CommonButton}" Margin="10" Height="44" Width="270" Content="История изменений" 
+                        Focusable="False" IsTabStop="False" IsDefault="True" />
+            </StackPanel>
+        </Grid>
+        <Border Grid.Row="1" VerticalAlignment="Bottom"  Background="{StaticResource PrimaryLightBrush}" Height="35">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="White"/>
+        </Border>
+    </Grid>
+</Page>
